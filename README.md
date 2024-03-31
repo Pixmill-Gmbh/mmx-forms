@@ -34,6 +34,29 @@ After successful installation you can log in to manager `http://127.0.0.1:8080/m
 - username `admin` 
 - password `adminpassword`
 
+### The logic of work
+
+- Main source code of mmxForms located in the `mmx-forms` submodule.
+- This directory is mounted under the root of PHP Docker container as `/mmx-forms`.
+- This path specified as custom repository in MODX `composer.json`:
+```json
+"repositories": {
+    "mmx-forms": {
+        "type": "path",
+        "url": "/mmx-forms"
+    }
+}
+```
+- When we run `composer require mmx-forms` it is symlinked from local directory to `/modx/core/vendor/mmx-forms`.
+- When we run `composer exec mmx-forms install` it make 2 more symlinks:
+  - `/modx/core/vendor/mmx-forms/core` to `/modx/core/components/mmx-forms`
+  - `/modx/core/vendor/mmx-forms/assets/dist` to `/modx/assets/components/mmx-forms`
+
+When you change something in the `mmx-forms` subdirectory, it is immediately reflected on the MODX website, without 
+any additional actions.
+
+Enjoy the developing process!
+
 ### Develop frontend
 
 mmxForms extra is located in `/manager/?a=home&namespace=mmx-forms#/` and uses built files from `mmx-forms/assets/dist`
