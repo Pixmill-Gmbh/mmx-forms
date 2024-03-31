@@ -1,0 +1,3 @@
+[submodule "mmx-forms"]
+	path = mmx-forms
+	url = https://github.com/bezumkin/mmx-forms
